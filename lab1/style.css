@@ -1,0 +1,84 @@
+body{
+    font-size: 12pt;
+}
+
+#logo {
+	background-image: url("hkucs-logo.jpg");
+	background-repeat: no-repeat;
+	background-size: 600px 100px;
+	height: 100px;
+	width: 50%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin:auto;
+}
+
+#sidebar {
+	float: left;
+	width: 165px;
+}
+
+#sidebar ul {
+	background: #313131;
+	padding: 10px;
+	list-style:none;
+}
+
+#sidebar a {
+	text-decoration: none;
+	font-size: 16px;
+	color: white;
+}
+
+#search-bar input[type="text"] {
+	width: 160px;
+	height: 30px;
+	border-width: 2px;
+	border-style: "solid";
+	border-color: #ccc;
+	margin-bottom: 5px;
+	margin-top: -5px;
+}
+
+#search-bar input[type="submit"] {
+	width: 160px;
+	height: 30px;
+	background-color: #FFA500;
+	font-size: 16px;
+	color: white;
+}
+
+#newsevents {
+	position: relative;
+	right: 10%;
+	display: inline;
+	float: right;
+	width: 65%;
+	padding: 15px;
+	color: white;
+}
+
+#newsevents th {
+	background-color: #0000a0;
+	font-size: large;
+	padding: 10px;
+}
+
+#newsevents a:visited {
+	color: #800080;
+}
+
+#newsevents a:link {
+	color: #0000FF;
+}
+
+#newsevents a:hover{
+	color: #FF0000;
+}
+
+#footer {
+	background-color: #00ffff;
+	position: relative;
+	top: 100px;
+	clear: both;
+}

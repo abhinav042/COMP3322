@@ -1,0 +1,146 @@
+*{
+	box-sizing: border-box;
+}
+
+
+body{
+    font-size: 12pt;
+}
+
+
+#logo{
+	display:block;
+    max-width: 100%;
+    height: auto;
+}
+
+#sidebar{
+	float: left;
+}
+
+.nav{
+	width: 160px;
+    padding: 10px;
+    background-color: #313131;
+}
+
+.nav a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.nav li{
+    display: block;
+    list-style-type: none;
+}
+
+.searchInput {
+	margin-bottom: 5px;
+	width: 160px;
+    height: 30px;
+    border-color: #ccc;
+    border-style: solid;
+	border-width: 2px;
+    font-size: 14px;
+	display:block;
+    transition: width, height 2s;
+}
+
+.searchInput:hover {
+    width: 320px;
+    height: 60px;
+}
+
+.searchButton {
+    width: 160px;
+    height: 30px;
+    background: #FFA500;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+#news {
+    width: 700px;
+    margin-left: 35px;
+    float: left;
+}
+
+.newstitle {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #0000a0;
+    color: white;
+    font-size: large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cssMultiCol {
+    -webkit-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 20px;
+    column-gap: 20px;
+    -webkit-column-rule-style: solid;
+    column-rule-style: solid;
+    -webkit-column-rule-color: #FF0000;
+    column-rule-color: #FF0000;
+    width: 100%;
+}
+
+.cssMultiCol div {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    font: bold 18px Poppins, Serif;
+    text-shadow: 1px 1px 3px #000000;
+    color: white;
+    background-color: bisque;
+}
+
+.cssMultiCol div img {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    float: left;
+}
+
+.cssMultiCol div .col-break {
+    padding-top: 20px;
+}
+
+#footer{
+	clear: both;
+	position: relative;
+	top: 100px;
+	float:left;
+    background: -webkit-linear-gradient(#00ffff, blue);
+    background: linear-gradient(#00ffff, blue);
+	background-color:#00ffff; /* For browsers that do not support gradients */
+}
+
+@media screen and (max-width: 1000px) and (min-width: 550px) {
+    #news {
+        width: 325px;
+    }
+    .cssMultiCol {
+        -webkit-column-count: 1;
+        column-count: 1;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    body {
+        background-color: lightyellow;
+    }
+    #news {
+        width: 100%;
+        margin-left: 0px;
+    }
+    .cssMultiCol {
+        -webkit-column-count: 1;
+        column-count: 1;
+    } 
+}
