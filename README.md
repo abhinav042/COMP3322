@@ -2,4 +2,7 @@
 A repo for labs, assignments, and projects for COMP3322 : Modern Technologies on World Wide Web
 
 # lab 1
-A basic, static website made using HTML. The website is deployed over at : http://i.cs.hku.hk/~agoyal/lab1/index.html
+A basic, static webpage made using HTML. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/lab1/index.html
+
+# lab 2
+A basic, responsive webpage made using HTML and CSS. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/lab2/index.html
