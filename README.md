@@ -1,2 +1,2 @@
 # COMP3322
-a repo for COMP3322 : Modern Technologies on World Wide Web
+A repo for labs, assignments, and projects for COMP3322 : Modern Technologies on World Wide Web
