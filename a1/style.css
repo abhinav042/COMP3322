@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+	font-size: 18px;
+}
+
+#hku-logo {
+	margin-top: 15px;
+	width: 120px;
+}
+
+#header {	
+	
+}
+
+#mailbox {
+	float: left;
+}

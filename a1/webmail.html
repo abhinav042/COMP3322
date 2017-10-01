@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
+	<title>email service</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="webmail.js">
+	</script>
+	<script src="external.js">
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron" id="header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-4">
+					<img id="hku-logo" class="img-responsive" src="hku-shield.png" alt="hku-icon">
+				</div>
+				<div class="col-xs-8">
+					<h1>HKU EMAIL SYSTEM</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="function">
+			<div class="row">
+				<div class="col-sm-1"> </div>
+				<div id = "delete" class="col-xs-2"><button class="btn-sm btn-danger">Delete</button></div>
+				<div id = "move" class="col-xs-7"><button class="btn-sm btn-primary">Move to Important</button></div>
+				<div id = "left" class="col-xs-1"><button class="btn-sm btn-light"> < </button></div>
+				<div id = "right" class="col-xs-1"><button class="btn-sm btn-light"> > </button></div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div id="mailbox">
+		<ul class="list-group">
+			<div><a href="./webmail/Inbox" class="list-group-item list-group-item-action">Inbox</a></div>
+			<div><a href="./webmail/Important" class="list-group-item list-group-item-action">Important</a></div>
+			<div><a href="./webmail/Trash" class="list-group-item list-group-item-action">Trash</a></div>
+		</ul>
+	</div>
+	<div id="email-list">
+		<div id="email"></div>
+	</div>
+	</div>
+</body>
+</html>
