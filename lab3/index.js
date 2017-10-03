@@ -1,7 +1,7 @@
 let lastRecord = 0;
 function pullMore() {
 	let xmlhttp;
-	if (window.XMLHttpRequest()) {
+	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();
 	} else {
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
