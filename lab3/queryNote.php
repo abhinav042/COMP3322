@@ -14,7 +14,7 @@ $result = mysqli_query($conn, $query) or die('Error!'.mysql_error($conn));
 
 // display data from the database
 while($row = mysqli_fetch_array($result)) {
-	print '<div class="Note" id='.$row['id'].'>';
+	print '<div class="note" id='.$row['id'].'>';
 	print '<span>'.$row['doneOrNot'].'</span><h3>'.$row['title'].'</h3><br><h4>'.$row['datetime'].'</h4><p>'.$row['taskdescription'].'</p>';
 	print '</div>';
 }

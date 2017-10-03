@@ -8,7 +8,7 @@ function pullMore() {
 	}
 	xmlhttp.onreadystatechange = function() {
 		if(this.readyState === 4 && this.status === 200) {
-			document.getElementById("Note").innerHTML = xmlhttp.responseText;
+			document.getElementById("note").innerHTML = xmlhttp.responseText;
 			xmlhttp.open("GET", `queryNote.php?lastRecord=${lastRecord}`, true);
 			xmlhttp.send();
 		}
