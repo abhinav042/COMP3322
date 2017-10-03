@@ -7,7 +7,7 @@ function pullMore() {
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	xmlhttp.onreadystatechange = function() {
-		if(this.readyState === 4 && this.status === 200) {
+		if(this.readyState == 4 && this.status == 200) {
 			document.getElementById("note").innerHTML = xmlhttp.responseText;
 			xmlhttp.open("GET", `queryNote.php?lastRecord=${lastRecord}`, true);
 			xmlhttp.send();
