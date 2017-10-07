@@ -4,50 +4,75 @@
 	<meta charset="UTF-8" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
 	<title>email service</title>
 	<link href="style.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+	</script>
 	<script src="webmail.js">
 	</script>
-	<script src="external.js">
-	</script>
 </head>
-<body>
+<body onload="getInitData()">
 	<div class="container">
+		<!-- HEADER -->
 		<div class="jumbotron" id="header">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-4">
-					<img id="hku-logo" class="img-responsive" src="hku-shield.png" alt="hku-icon">
-				</div>
-				<div class="col-xs-8">
-					<h1>HKU EMAIL SYSTEM</h1>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-4"><img alt="hku-icon" class="img-responsive" id="hku-logo" src="hku-shield.png"></div>
+					<div class="col-xs-8">
+						<h1>HKU EMAIL SYSTEM</h1>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="container">
-		<div class="function">
-			<div class="row">
-				<div class="col-sm-1"> </div>
-				<div id = "delete" class="col-xs-2"><button class="btn-sm btn-danger">Delete</button></div>
-				<div id = "move" class="col-xs-7"><button class="btn-sm btn-primary">Move to Important</button></div>
-				<div id = "left" class="col-xs-1"><button class="btn-sm btn-light"> < </button></div>
-				<div id = "right" class="col-xs-1"><button class="btn-sm btn-light"> > </button></div>
+		<!-- FUNCTION BUTTONS -->
+		<div class="container">
+			<div class="function">
+				<div class="row">
+					<div class="col-xs-3" id="delete">
+						<button class="btn-sm btn-danger">Delete</button>
+					</div>
+					<div class="col-xs-5" id="move">
+						<button class="btn-sm btn-primary">Move to Important</button>
+					</div>
+					<div class="col-xs-1" id="left" onclick="getPrevData()">
+						<button class="btn-sm btn-light"><</button>
+					</div>
+					<div class="col-xs-1" id="right" onclick="getInitData()">
+						<button class="btn-sm btn-light">></button>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<hr>
-	<div id="mailbox">
-		<ul class="list-group">
-			<div><a href="./webmail/Inbox" class="list-group-item list-group-item-action">Inbox</a></div>
-			<div><a href="./webmail/Important" class="list-group-item list-group-item-action">Important</a></div>
-			<div><a href="./webmail/Trash" class="list-group-item list-group-item-action">Trash</a></div>
-		</ul>
-	</div>
-	<div id="email-list">
-		<div id="email"></div>
-	</div>
+		<hr>
+		<!-- SIDEBAR -->
+		<div id="mailbox">
+			<div class="list-group" style="margin-left: 2em">
+				<div class="list-group-item list-group-item-action active" id="inbox" onclick="setActive(this);setMoveToButton();getInitData();">
+					Inbox
+				</div>
+				<div class="list-group-item list-group-item-action" id="important" onclick="setActive(this);setMoveToButton();getInitData();">
+					Important
+				</div>
+				<div class="list-group-item list-group-item-action" id="trash" onclick="setActive(this);setMoveToButton();getInitData();">
+					Trash
+				</div>
+			</div>
+		</div>
+		<!-- DISPLAY EMAIL -->
+		<div id="email-list">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Select</th>
+						<th>Sender</th>
+						<th>Title</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
