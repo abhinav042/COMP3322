@@ -10,7 +10,7 @@ function pullMore() {
 	}
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			document.getElementById("Note").innerHTML = xmlhttp.responseText;
+			document.getElementById("Note").innerHTML += xmlhttp.responseText;
 		}
 	};
 	xmlhttp.open("GET", `queryNote.php?lastRecord=${lastRecord}`, true);
@@ -18,9 +18,7 @@ function pullMore() {
 	lastRecord += 3;
 };
 
-// toggle yes - done
-
-
+// toggle yes - no
 function changeState(elem) {
 	const oldValue = elem.innerHTML;
 	const noteID = elem.parentNode.getAttribute('id');
