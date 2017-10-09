@@ -8,4 +8,4 @@ A basic, static webpage made using HTML and CSS. The webpage is deployed over at
 A basic, responsive, static webpage made using HTML and CSS. Added basic CSS transitions and media queries. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/lab2
 
 # lab 3
-A to-do webapp made using mysql, php, html, and CSS. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/lab3
+A to-do webapp made using ajax, mysql, php, html, and CSS. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/lab3
