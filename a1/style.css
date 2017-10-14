@@ -13,4 +13,24 @@ body {
 
 #mailbox {
 	float: left;
+	padding: 0;
+	margin-left: 1%;
+}
+
+#email-list {
+	float: right;
+	margin-right: 20px;
+	padding: 0;
+	width: 80%;
+}
+
+@media (max-width: 767px) {
+	#email-list {
+		margin: 0;
+		width: 100%;
+	}
+	#mailbox {
+		width: 100%;
+		padding-right: 5%;
+	}
 }
