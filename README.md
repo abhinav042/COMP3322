@@ -11,4 +11,4 @@ A basic, responsive, static webpage made using HTML and CSS. Added basic CSS tra
 A to-do webapp made using ajax, mysql, php, html, and CSS. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/lab3
 
 ## a1 - assignment 1
-A email handling system using HTML, CSS, Javascript, JQuery, Ajax, PHP, and friends. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/a1
+An email handling system using HTML, CSS, Javascript, JQuery, Ajax, MySQL, PHP, and friends. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/a1
