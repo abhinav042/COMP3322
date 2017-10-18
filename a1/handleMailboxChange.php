@@ -1,10 +1,10 @@
 <?php
 
 // connect to the db
-$conn=mysqli_connect('localhost', 'comp3322', 'agoyal') or die('Error!1'.mysqli_error($conn));
+$conn=mysqli_connect('sophia', 'agoyal', 'zIvdQsUN') or die('Error!1'.mysqli_error($conn));
 
 // select db
-mysqli_select_db($conn, 'comp3322') or die('Error!2'.mysqli_error($conn));
+mysqli_select_db($conn, 'agoyal') or die('Error!2'.mysqli_error($conn));
 
 // defining variables
 $updatedMailbox = $_GET['updatedMailbox'];
