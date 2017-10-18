@@ -1,10 +1,10 @@
 <?php 
 
 // connect to the db
-$conn=mysqli_connect('localhost', 'comp3322', 'agoyal') or die('Error!1'.mysqli_error($conn));
+$conn=mysqli_connect('sophia', 'agoyal', 'zIvdQsUN') or die('Error!1'.mysqli_error($conn));
 
 // select db
-mysqli_select_db($conn, 'comp3322') or die('Error!2'.mysqli_error($conn));
+mysqli_select_db($conn, 'agoyal') or die('Error!2'.mysqli_error($conn));
 
 // defining variables
 
@@ -15,10 +15,10 @@ $lastCount = $_GET['lastCount'];
 $recLimit = 5;
 
 // sql query for getting all the mails
-$query1 = "SELECT * FROM emails WHERE mailbox='$mailbox'";
+$query1 = "SELECT * FROM emails WHERE mailbox='$mailbox' ORDER BY emailID DESC";
 
 // sql query for limiting the query
-$query2 = "SELECT * FROM emails WHERE mailbox='$mailbox' LIMIT $firstCount, $recLimit";
+$query2 = "SELECT * FROM emails WHERE mailbox='$mailbox' ORDER BY emailID DESC LIMIT $firstCount, $recLimit";
 
 // executing the sql query 
 $result = mysqli_query($conn, $query2) or die('Error!3'.mysqli_error($conn));

@@ -1,0 +1,64 @@
+body {
+	background-image:url('theme.png');
+	background-size: contain;
+	background-repeat:no-repeat;
+	background-color: white;
+	font-family: helvetica, Arial, Verdane, sans-serif;
+}
+
+p {
+	word-wrap:break-word;
+	font-family: sans-serif;
+}
+
+div {
+	display: block;
+}
+
+#Checklist {
+	position: relative;
+	float: center;
+	padding-left: 70px;
+	padding-top: 100px;
+	width: 500px;
+	height: 80%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#notes {
+	width: 310px;
+}
+
+#more{
+	position: relative;
+	float: center;
+	padding-top: 10px;
+	padding-left: 50px;
+	width: 200px;
+	height: 40px;
+	text-align: center;
+}
+
+#more > p{
+	position: relative;
+	text-align: center;
+	background-color: #cccccc;
+}
+
+span {
+	text-align: center;
+	padding: 2px;
+	font-weight: bold;
+}
+
+h3 {
+	display: inline;
+	color: #0000ff;
+	padding-left: 10px;
+}
+
+h5 {
+	display: inline;
+	color: #cccccc;
+}
