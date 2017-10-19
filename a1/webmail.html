@@ -4,7 +4,6 @@
 	<meta charset="UTF-8" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
 	<title>email service</title>
 	<link href="style.css" rel="stylesheet" type="text/css">
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
@@ -18,8 +17,8 @@
 		<div class="jumbotron" id="header">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-4"><img alt="hku-icon" class="img-responsive" id="hku-logo" src="hku-shield.png"></div>
-					<div class="col-xs-8">
+					<div class="col-4"><img alt="hku-icon" class="img-responsive" id="hku-logo" src="hku-shield.png"></div>
+					<div class="col-8">
 						<h1>HKU EMAIL SYSTEM</h1>
 					</div>
 				</div>
@@ -29,16 +28,16 @@
 		<div class="container">
 			<div class="function">
 				<div class="row">
-					<div class="col-xs-3" id="delete">
+					<div class="col-3" id="delete">
 						<button class="btn-sm btn-danger" id="move-to-del" onclick='updateMailbox(`Trash`);'>Delete</button>
 					</div>
-					<div class="col-xs-5" id="move">
+					<div class="col-5" id="move">
 						<button class="btn-sm btn-primary" id="move-to-imp" onclick='updateMailbox(`Important`);'>Move to Important</button>
 					</div>
-					<div class="col-xs-1" onclick="setAction('left');getInitData()">
+					<div class="col-1" onclick="setAction('left');getInitData()">
 						<button id="left" class="btn-sm btn-light"><</button>
 					</div>
-					<div class="col-xs-1" onclick="setAction('right');getInitData()">
+					<div class="col-1" onclick="setAction('right');getInitData()">
 						<button id="right" class="btn-sm btn-light">></button>
 					</div>
 				</div>
