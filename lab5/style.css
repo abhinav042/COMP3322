@@ -1,0 +1,102 @@
+body {
+	width: 291px;
+	height: 593px;
+	background-image:url('background.png');
+	background-repeat:no-repeat;	
+}
+	
+#homeButton {
+	width: 60px;
+	height: 50px;
+	position: absolute;
+	top: 67px;
+	left: 28px;
+	z-index:2
+}
+
+#videoAppscreen {
+	display: none;
+	position: absolute;
+	
+	/*Tune the edges of provided appscreens to align with the backgrond*/
+	top: 50px;
+	left: 28px;
+	width: 254px;
+	height: 510px;
+}
+
+
+#time {
+	position: absolute;
+	top: 95px;
+	left: 58px;
+	font-family: "Times New Roman",Times,serif;
+	font-size: 55px;
+}
+
+#day {
+	position: absolute;
+	font-size: 20px;
+	top: 170px;
+	left: 85px;
+}
+
+.icon {
+	position: absolute;
+	top: 5px;
+	left: 15px;
+}
+
+.block {
+	position: absolute;
+	width: 62px;
+	height: 62px;
+}
+
+.blockRow1 {
+	top: 201px;
+}
+
+.blockRow2 {
+	top: 265px;
+}
+
+.blockRow3 {
+	top: 329px;
+}
+
+.blockRow4 {
+	top: 393px;
+}
+
+.blockRow5 {
+	top: 457px;
+}
+
+.blockCol1 {
+	left: 19px;
+}
+
+.blockCol2 {
+	left: 83px;
+}
+
+.blockCol3 {
+	left: 147px;
+}
+
+.blockCol4 {
+	left: 211px;
+}
+
+#video{
+	
+	position: absolute;
+	display: none;
+	top: 80px;
+	width: 250px;
+	height: 250px;
+	left: 30px;
+	z-index:1;
+}
+

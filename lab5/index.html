@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>iPhone Simulator</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body onload="drawTime();drawDay();">
+
+	<div id="time"></div>
+	<div id="day"></div>
+
+
+	<div class="blockRow1 blockCol1 block">
+		<img src="music.png" id="musicIcon" class="icon">
+	</div>
+	
+	<div class="blockRow1 blockCol2 block"></div>
+	
+	
+
+	<img id="videoAppscreen" src="video_appscreen.jpg">
+	
+	<div id="homeButton" onclick="returnToHomescreen()"></div>
+
+</body>
+
+<script>
+	function drawDay() {
+		d = new Date();
+		// e.g., d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
+		datetext = d.toDateString();
+		// datestring is "Sun Oct 13 2013"
+
+		document.getElementById("day").innerHTML = datetext;
+	}
+
+	function drawTime() {
+		
+		
+	}
+	
+	function openVideo() {
+	
+	}
+
+	function returnToHomescreen() {		
+		
+	}
+	
+	function allowDrop(ev) {
+		
+		
+	}
+
+	function drag(ev) {
+
+	}
+
+	function drop(ev) {
+
+	}
+
+	setInterval(drawTime, 1000);
+</script>
+
+</html>
