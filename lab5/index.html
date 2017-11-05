@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <head>
 	<meta charset="UTF-8">
 	<title>iPhone Simulator</title>
@@ -11,15 +10,24 @@
 
 	<div id="time"></div>
 	<div id="day"></div>
-
-
-	<div class="blockRow1 blockCol1 block">
-		<img src="music.png" id="musicIcon" class="icon">
+	<div id="block">
+		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="blockRow1 blockCol1 block">
+			<img src="music.png" id="musicIcon" class="icon" draggable="true" ondragstart="drag(event)">
+		</div>		
+		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="blockRow1 blockCol2 block">
+			<img src="pages.png" id="pagesIcon" class="icon" draggable="true" ondragstart="drag(event)">
+		</div>
+		<div ondrop="drop(event)" ondragover="allowDrop(event)" onclick="openVideo()" class="blockRow1 blockCol3 block">
+			<img src="video.png" id="videoIcon" class="icon" draggable="true" ondragstart="drag(event)">
+		</div>
+		<div ondrop="drop(event)" ondragover="allowDrop(event)" class="blockRow1 blockCol4 block">
+			<img src="messages.png" id="messagesIcon" class="icon" draggable="true" ondragstart="drag(event)">
+		</div>
 	</div>
 	
-	<div class="blockRow1 blockCol2 block"></div>
-	
-	
+	<video id="video" controls="">
+		<source src="Garfield.mp4" type="video/mp4">
+	</video>
 
 	<img id="videoAppscreen" src="video_appscreen.jpg">
 	
@@ -28,39 +36,55 @@
 </body>
 
 <script>
-	function drawDay() {
-		d = new Date();
-		// e.g., d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
-		datetext = d.toDateString();
-		// datestring is "Sun Oct 13 2013"
+	// for loop to gen div
+	for (let i = 2; i <= 5; i++) {
+		for (let j = 1; j <= 4; j++) {
+			document.getElementById("block").innerHTML += `<div ondrop="drop(event)" ondragover="allowDrop(event)" class="blockRow${i} blockCol${j} block"></div>`;
+		}
+	}
 
+	function drawDay() {
+		let d = new Date();
+		// e.g., d is "Sun Oct 13 2013 20:32:01 GMT+0530 (India Standard Time)"
+		let datetext = d.toDateString();
+		// datestring is "Sun Oct 13 2013"
 		document.getElementById("day").innerHTML = datetext;
 	}
 
 	function drawTime() {
-		
-		
+		let d = new Date();
+		let hourText = d.getHours();
+		let minuteText = d.getMinutes();
+		let secondText = d.getSeconds();
+		document.getElementById("time").innerHTML = `${hourText<9? "0"+hourText : hourText}:${minuteText<9? "0"+minuteText : minuteText}:${secondText<9? "0"+secondText : secondText}`;
 	}
 	
 	function openVideo() {
-	
+		document.getElementById("videoAppscreen").style.display = "inline";
+		document.getElementById("video").style.display = "inline";
 	}
 
-	function returnToHomescreen() {		
-		
+	function returnToHomescreen() {
+		let video = document.getElementById("video");
+		video.pause();	
+		document.getElementById("videoAppscreen").style.display = "none";
+		video.style.display = "none";
 	}
 	
 	function allowDrop(ev) {
-		
-		
+		if (ev.target.classList[2]=="block" && ev.target.children.length==0) {
+			ev.preventDefault();
+		}
 	}
 
 	function drag(ev) {
-
+		ev.dataTransfer.setData("text", ev.target.id);
 	}
 
 	function drop(ev) {
-
+		ev.preventDefault();
+		let data = ev.dataTransfer.getData("text");
+		ev.target.appendChild(document.getElementById(data));
 	}
 
 	setInterval(drawTime, 1000);
