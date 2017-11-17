@@ -22,6 +22,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Database
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/lab6');
+
+// make db accessible to our routes
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
+
 app.use('/', index);
 app.use('/users', users);
 
