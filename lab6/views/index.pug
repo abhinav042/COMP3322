@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to lab 6.
+
+    // Wrapper
+    #wrapper
+
+        // REPORT LIST
+        h2 Annual Report List
+        #reportList            
+
+        // /REPORT LIST
+
+        // ADD REPORT
+        br
+        br
+        h2 Add/Update Annual Report
+        #addReport
+            fieldset
+                input#inputReportCompany(type='text', placeholder='Company')
+                br
+                select(id="inputReportYear")
+                    option(value='0') -- Year --
+                    option(value='2011') 2010
+                    option(value='2011') 2011
+                    option(value='2012') 2012
+                    option(value='2013') 2013
+                    option(value='2014') 2014
+                    option(value='2015') 2015
+                    option(value='2016') 2016
+                    option(value='2017') 2017
+                br
+                select(id="inputReportProfit")
+                    option(value='0') -- Profit --
+                    option(value='< $2 billion') < $2 billion
+                    option(value='$2~$4 billion') $2~$4 billion
+                    option(value='$4~$8 billion') $4~$8 billion
+                    option(value='$8~$10 billion') $8~$10 billion
+                    option(value='$10~$12 billion') $10~$12 billion
+                    option(value='$12~$14 billion') $12~$14 billion
+                    option(value='$14~$16 billion') $14~$16 billion
+                    option(value='> $16 billion') > $16 billion
+                br
+                br
+                button(type='button',id='btnAddReport',class='myButton') Add/Update Report
+        // /ADD REPORT
+
+
+    // /WRAPPER
