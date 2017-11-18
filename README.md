@@ -12,3 +12,8 @@ A to-do webapp made using ajax, mysql, php, html, and CSS. The webpage is deploy
 
 ## a1 - assignment 1
 An email handling system using HTML, CSS, Javascript, JQuery, Ajax, MySQL, PHP, and friends. The webpage is deployed over at : http://i.cs.hku.hk/~agoyal/a1
+
+## lab5
+A simple icon drag-drop webapp made using HTML5
+
+## lab6
