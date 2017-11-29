@@ -17,3 +17,7 @@ An email handling system using HTML, CSS, Javascript, JQuery, Ajax, MySQL, PHP, 
 A simple icon drag-drop webapp made using HTML5
 
 ## lab6
+A simple Node.js app which allows users to add net annual profit for a company and uses MongoDB for persistent data
+
+## lab7
+

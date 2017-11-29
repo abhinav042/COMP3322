@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 7</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="/javascripts/externalJS.js"></script>
+</head>
+<body ng-init="getReports()" ng-app="reportList" ng-controller="reportListController">
+	<h1>Lab 7</h1>
+	<p>Welcome to lab 7.</p><!-- Wrapper-->
+	<div id="wrapper"><!-- REPORT LIST-->
+		<h2>Annual Report List</h2>
+		<p>Company &nbsp&nbsp&nbsp&nbsp Year &nbsp&nbsp&nbsp&nbsp Profits &nbsp&nbsp&nbsp&nbspdelete?</p>
+		<div id="reportList">      
+            <div ng-repeat='report in reports'>
+                <div>
+                    {{report.company}}&nbsp&nbsp&nbsp&nbsp
+                    {{report.year}}&nbsp&nbsp&nbsp&nbsp {{report.profit}} &nbsp&nbsp&nbsp&nbsp
+                    <button class="myButton deleteReport" ng-click='deleteReport(report._id)'>delete</button>
+                </div>
+                <br>
+            </div>
+		</div><!-- /REPORT LIST--><!-- ADD REPORT-->
+		<br>
+		<br>
+		<h2>Add/Update Annual Report</h2>
+		<div id="addReport">
+				<input ng-model="new_report.company" id="inputReportCompany" type="text" placeholder="Company">
+				<br>
+				<select ng-model="new_report.year" id="inputReportYear">
+					<option value="">-- Year --</option>
+					<option value="2011">2010</option>
+					<option value="2011">2011</option>
+					<option value="2012">2012</option>
+					<option value="2013">2013</option>
+					<option value="2014">2014</option>
+					<option value="2015">2015</option>
+					<option value="2016">2016</option>
+					<option value="2017">2017</option>
+				</select>
+				<br>
+				<select ng-model="new_report.profit" id="inputReportProfit">
+					<option value="">-- Profit --</option>
+					<option value="&lt; $2 billion">< $2 billion</option>
+					<option value="$2~$4 billion">$2~$4 billion</option>
+					<option value="$4~$8 billion">$4~$8 billion</option>
+					<option value="$8~$10 billion">$8~$10 billion</option>
+					<option value="$10~$12 billion">$10~$12 billion</option>
+					<option value="$12~$14 billion">$12~$14 billion</option>
+					<option value="$14~$16 billion">$14~$16 billion</option>
+					<option value="&gt; $16 billion">> $16 billion</option>
+				</select>
+				<br>
+				<br>
+				<button ng-click="addorupdateReport(new_report)" class="myButton" type="button" id="btnAddReport">Add/Update Report</button>
+		</div><!-- /ADD REPORT-->
+	</div><!-- /WRAPPER-->
+</body>
+</html>

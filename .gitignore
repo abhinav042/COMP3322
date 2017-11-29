@@ -2,3 +2,4 @@
 mongodb
 node_modules/
 data
+*.zip
