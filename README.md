@@ -20,4 +20,4 @@ A simple icon drag-drop webapp made using HTML5
 A simple Node.js app which allows users to add net annual profit for a company and uses MongoDB for persistent data
 
 ## lab7
-
+An extension of Lab6 using Angular.js
