@@ -3,5 +3,4 @@ mongodb
 node_modules/
 data
 *.zip
-yarn.lock
 .gitkeep
