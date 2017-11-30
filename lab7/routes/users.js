@@ -11,8 +11,7 @@ router.get('/annualreports', (req, res) => {
   collection.find({},{},function(err,docs){
     if (err === null)
     	res.json(docs);
-		else r
-			es.send({msg: err });
+		else res.send({msg: err });
     });
 });
 

@@ -2,12 +2,14 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-const chat = require('./require/chat');
+const chat = require('./routes/chat');
+const user = require('./routes/users');
 
 var app = express();
 
@@ -23,14 +25,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// setting session
+app.use(session({secret: 'ssshhhhh'}));
+
 // Database
-const mongo = require('mongo');
+const mongo = require('mongodb');
 const monk = require('monk');
 const db = monk('localhost:27017/assignment2');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : false}));
+
+// make db accessible to our routes
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
 
 // app.use('/', index);
 // app.use('/users', users);
 app.use('/', chat);
+app.use('/user', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
