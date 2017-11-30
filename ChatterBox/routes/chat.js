@@ -93,25 +93,52 @@ router.put('/saveuserinfo', (req, res, next) => {
 });
 
 /* GET get conversation with friend */
+// TODO
 router.get('/getconversation/:friendid', (req, res, next) => {
   let friend;
   const friendId = req.params.friendid;
   const db = req.db;
   const collection = db.get('userList');
   let icon;
+  let status;
   let messageList;
+  let responseJSON;
   collection.find({_id:friendid}, (err, docs) => {
     if (err === null) {
-      const messageCollection = db.get('messageList');
       icon = docs.icon;
-      messageList = 
-
+      status = docs.status;
+      const messageCollection = db.get('messageList');
+      messageCollection.find({senderId:req.session.userId, receiverId:friendId}, (err, docs) => {
+        if (err === null) messageList = docs;
+      });
+      messageCollection.find({senderId:friendId, receiverId:req.session.userId}, (err, docs) => {
+        if (err === null) messageList += docs;
+      });
+      
     }
   });
+  res.send(responseJSON);
 });
 
 /* POST send message to friend */
-router.post('/')
+router.post('/postmessage/:friendid', (req, res, next) => {
+  const friendId = req.params.friendid;
+  const db = req.db;
+  const collection = db.get('messageList');
+  collection.insert({senderId:req.session.userId, receiverId:friendId, message:req.body.message, date:req.body.date, time: req.body.time}, (err, result) => {
+    res.send((err === null)?req.session.userId:{msg:err});
+  });
+});
 
+/* DELETE message */
+router.delete('/deletemessage/:msgid', (req, res, next) => {
+  const db = req.db;
+  const collection = db.get('messageList');
+  collection.remove()
+}); 
+
+/* GET getnewmessages */
+
+/* GET getnewmessagenumber */
 
 module.exports = router;
