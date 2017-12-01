@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ChatterBox</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-	<link rel="stylesheet" href="/stylesheets/mystyles.css">
-    <script src="/javascripts/myscripts.js"></script>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="ie=edge" http-equiv="X-UA-Compatible">
+	<title>ChatterBox</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+	</script>
+	<link href="/stylesheets/mystyles.css" rel="stylesheet">
+	<script src="/javascripts/myscripts.js">
+	</script>
 </head>
-<body>
-    <p>HELLO WORLD!</p>
+<body ng-app="chatterBox" ng-controller="chatController">
+    <div style="margin:auto;width:50%;"><h1 style="margin-top:100px;margin-bottom:-50px;text-align:center;">ChatterBox</h1></div>
+	<div>
+		<div class="login-page">
+			<div class="form">
+				<form class="login-form">
+                    <input placeholder="username" type="text"> <input placeholder="password" type="password"> 
+                    <button ng-click="">login</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
