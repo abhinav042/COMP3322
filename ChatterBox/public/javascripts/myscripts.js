@@ -8,7 +8,11 @@ chatter_box.controller('chatController', function($scope, $http) {
                 $scope.showLogin = true;
             }
             else {
+                console.log(`${res.data.name}`);
+                $scope.name = res.data.name;
+                $scope.friends = res.data.friends;
                 $scope.showLogin = false;
+                //$scope.name = res.data.name;
             }
         });
     }

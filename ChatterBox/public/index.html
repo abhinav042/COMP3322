@@ -42,7 +42,7 @@
 		<div class="header">
 			<div class="row">
 				<div class="col-xs-3">
-					
+					<h3 style='text-align:center'>{{name}}</h3>
 				</div>
 				<div class="col-xs-6">
 					<h1>ChatterBox</h1>
@@ -54,10 +54,13 @@
 		</div>
 		<div class="row">
 			<div id="side-bar" class="col-xs-2">
-
+				<h3 style="text-align:center">Friends</h3>
+				<div class="friend" ng-repeat="friend in friends">
+					<h4>{{friend.name}}</h4>
+				</div>
 			</div>
 			<div id="main-body" class="col-xs-10">
-
+				
 			</div>
 		</div>
 	</div>
