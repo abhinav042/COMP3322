@@ -17,11 +17,12 @@ chatter_box.controller('chatController', function($scope, $http) {
         $scope.showLogin = false;
         console.log($scope.password);
         if ($scope.username && $scope.password) {
-            $http.post("/login", {username:$scope.username, password:$scope.password}).then(res => {
+            $http.post("/login", {name:$scope.username, password:$scope.password}).then(res => {
                 if (res.data === "LOGIN INVALID") {
+                    console.log("THERE WAS A VALIDATION ERROR");
                     $scope.showLogin = true;
                 } else {
-                    
+                    $scope.showLogin = false;
                 }
             });
         } else {
