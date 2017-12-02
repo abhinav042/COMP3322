@@ -5,6 +5,7 @@ let sess;
 /* GET load */
 router.get('/load', (req, res, next) => {
   sess = req.session;
+  console.log(req.session.userId);
   if (!sess.userId) {
     res.send("");
   } else {
@@ -23,17 +24,14 @@ router.post('/login', (req, res, next) => {
   const collection = db.get('userList');
   const username = req.body.username;
   const password = req.body.password;
-  const filter = {
-    username, 
-    password
-  };
-  collection.find(filter, (err, docs) => {
+  collection.find({name:username, password:password}, (err, docs) => {
     if (err === null) {
       if (docs.length === 0) {
         // invalid
         res.send('LOGIN INVALID');
       } else {
-        req.session.userId = docs._id;
+        req.session.userId = docs[0]._id;
+        console.log(`The userId is ${req.session.userId}`);
         collection.update({_id: req.session.userId}, {status: 'Online'});
         const responseJSON = {
           'name' : docs.name,
