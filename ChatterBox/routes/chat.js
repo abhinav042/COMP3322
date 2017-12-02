@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 let sess;
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+
+// /* GET home page. */
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 /* GET load */
 router.get('/load', (req, res, next) => {
@@ -60,17 +61,18 @@ router.get('/logout', (req, res, next) => {
 });
 
 /* GET getUserInfo */
+
 router.get('/getuserinfo', (req, res, next) => {
   const db = req.db;
   const collection = db.get('userList');
   collection.find({_id:req.session.userId}, (err, docs) => {
     if (err === null) {
       const responseJSON = {
-        mobileNumber,
-        homeNumber,
-        address
+        'mobileNumber': docs[0].mobileNumber,
+        'homeNumber': docs[0].homeNumber,
+        'address': docs[0].address
       }
-      res.json(responseJSON);
+      res.send(responseJSON);
     } else {
       res.send({msg:err});
     }
@@ -81,14 +83,8 @@ router.get('/getuserinfo', (req, res, next) => {
 router.put('/saveuserinfo', (req, res, next) => {
   const db = req.db;
   const collection = db.get('userList');
-  collection.find({_id:req.session.userId}, (err, docs) => {
-    if (err === null) {
-      collection.update({mobileNumber: req.body.mobileNumber, homeNumber: req.body.homeNumber, address: req.body.address}, (err, msg) => {
-        res.send((err === null)?{msg:""}:{msg:err});
-      });
-    } else {
-      res.send({msg:err});
-    }
+  collection.update({_id:req.session.userId}, {mobileNumber: req.body.mobileNumber, homeNumber: req.body.homeNumber, address: req.body.address}, (err, result) => {
+    res.send((err === null)?{msg:""}:{msg:err});
   });
 });
 
@@ -103,8 +99,10 @@ router.get('/getconversation/:friendid', (req, res, next) => {
   let status;
   let messageList;
   let responseJSON;
-  collection.find({_id:friendid}, (err, docs) => {
+  collection.find({_id:friendId}, (err, docs) => {
+    let friend_name;
     if (err === null) {
+      friend_name = docs.name;
       icon = docs.icon;
       status = docs.status;
       const messageCollection = db.get('messageList');
@@ -114,9 +112,12 @@ router.get('/getconversation/:friendid', (req, res, next) => {
       messageCollection.find({senderId:friendId, receiverId:req.session.userId}, (err, docs) => {
         if (err === null) messageList += docs;
       });
-      
+      // TODO update lastMsgId
+      collection.update({_id:"5a1f333627f2c2cb4bd454b8", "friends.name": friend_name}, {$set: {"friends.$.lastMsgId": 25}});
     }
   });
+  // TODO update lastMsgId
+  // collection.update({_id:"5a1f333627f2c2cb4bd454b8", "friends.name": friend_name}, {$set: {"friends.$.lastMsgId": 25}});
   res.send(responseJSON);
 });
 
@@ -134,10 +135,14 @@ router.post('/postmessage/:friendid', (req, res, next) => {
 router.delete('/deletemessage/:msgid', (req, res, next) => {
   const db = req.db;
   const collection = db.get('messageList');
-  collection.remove()
+  const msgId = req.params.msgid;
+  collection.remove({_id:msgId});
 }); 
 
 /* GET getnewmessages */
+router.get('/getnewmessages/:friendid', (req, res, next) => {
+
+});
 
 /* GET getnewmessagenumber */
 

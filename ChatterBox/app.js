@@ -6,10 +6,9 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+// var index = require('./routes/index');
+// var users = require('./routes/users');
 const chat = require('./routes/chat');
-const user = require('./routes/users');
 
 var app = express();
 
@@ -45,7 +44,6 @@ app.use(function(req,res,next){
 // app.use('/', index);
 // app.use('/users', users);
 app.use('/', chat);
-app.use('/user', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

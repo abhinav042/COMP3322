@@ -12,14 +12,19 @@
 	</script>
 </head>
 <body ng-app="chatterBox" ng-controller="chatController">
-    <div style="margin:auto;width:50%;"><h1 style="margin-top:100px;margin-bottom:-50px;text-align:center;">ChatterBox</h1></div>
 	<div>
-		<div class="login-page">
-			<div class="form">
-				<form class="login-form">
-                    <input placeholder="username" type="text"> <input placeholder="password" type="password"> 
-                    <button ng-click="">login</button>
-				</form>
+		<div style="margin:auto;width:50%;">
+			<h1 style="margin-top:100px;margin-bottom:-50px;text-align:center;">ChatterBox</h1>
+		</div>
+		<div>
+			<div class="login-page">
+				<div class="form">
+					<form class="login-form">
+						<input ng-model="username" placeholder="username" type="text">
+						<input ng-model="password" placeholder="password" type="password">
+						<button ng-click="login();">login</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
