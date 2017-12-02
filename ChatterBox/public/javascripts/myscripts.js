@@ -4,7 +4,7 @@ chatter_box.controller('chatController', function($scope, $http) {
     
     $scope.load = function() {
         $http.get("/load").then(res => {
-            if (res.data == "") {
+            if (res.data === "") {
                 $scope.showLogin = true;
             }
             else {
@@ -14,11 +14,10 @@ chatter_box.controller('chatController', function($scope, $http) {
     }
 
     $scope.login = function() {
-        $scope.showLogin = false;
-        console.log($scope.password);
+        console.log(`the username is : ${$scope.username}, the password is ${$scope.password}`);
         if ($scope.username && $scope.password) {
             $http.post("/login", {username:$scope.username, password:$scope.password}).then(res => {
-                if (res.data === "LOGIN INVALID") {
+                if (res.data.msg === 'LOGIN INVALID') {
                     console.log("THERE WAS A VALIDATION ERROR");
                     $scope.showLogin = true;
                 } else {
@@ -31,7 +30,7 @@ chatter_box.controller('chatController', function($scope, $http) {
     }
 
     $scope.logout = function() {
-        $
+        
     }
 
 });

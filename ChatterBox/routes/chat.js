@@ -5,7 +5,7 @@ let sess;
 /* GET load */
 router.get('/load', (req, res, next) => {
   sess = req.session;
-  console.log(req.session.userId);
+  console.log(`the session id is ${req.session.userId}`);
   if (!sess.userId) {
     res.send("");
   } else {
@@ -24,19 +24,22 @@ router.post('/login', (req, res, next) => {
   const collection = db.get('userList');
   const username = req.body.username;
   const password = req.body.password;
+  console.log(`the username is ${username}, the password is ${password}`);
   collection.find({name:username, password:password}, (err, docs) => {
     if (err === null) {
       if (docs.length === 0) {
         // invalid
-        res.send('LOGIN INVALID');
+        res.send({
+          msg:'LOGIN INVALID'
+        });
       } else {
         req.session.userId = docs[0]._id;
         console.log(`The userId is ${req.session.userId}`);
-        collection.update({_id: req.session.userId}, {status: 'Online'});
+        collection.update({_id: req.session.userId}, {$set: {status: 'online'}});
         const responseJSON = {
-          'name' : docs.name,
-          'icon' : docs.icon,
-          'friends' : docs.friends
+          'name' : docs[0].name,
+          'icon' : docs[0].icon,
+          'friends' : docs[0].friends
         }
         res.send(responseJSON);
       }
@@ -48,13 +51,12 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   const db = req.db;
   const collection = db.get('userList');
-  collection.update({_id: req.session.userId}, {status: 'Offline'});
+  collection.update({_id: req.session.userId}, {status: 'offline'});
   req.session.userId = null;
   res.send('');
 });
 
 /* GET getUserInfo */
-
 router.get('/getuserinfo', (req, res, next) => {
   const db = req.db;
   const collection = db.get('userList');
