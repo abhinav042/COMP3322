@@ -22,5 +22,5 @@ A simple Node.js app which allows users to add net annual profit for a company a
 ## lab7
 An extension of Lab6 using Angular.js
 
-##a2 
+## a2 
 A skype-esque chat application created using MEAN stack
