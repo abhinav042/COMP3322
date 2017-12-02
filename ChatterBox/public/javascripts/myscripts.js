@@ -30,7 +30,11 @@ chatter_box.controller('chatController', function($scope, $http) {
     }
 
     $scope.logout = function() {
-        
+        $http.get("/logout").then(res => {
+            if (res.data === "") {
+                $scope.showLogin = true;
+            }
+        });
     }
 
 });
