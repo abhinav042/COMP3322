@@ -7,6 +7,16 @@
 	<title>ChatterBox</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
 	</script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 	<link href="/stylesheets/mystyles.css" rel="stylesheet">
 	<script src="/javascripts/myscripts.js">
 	</script>
@@ -14,7 +24,7 @@
 <body ng-app="chatterBox" ng-controller="chatController" ng-init="load()">
 	<div id="login-div" ng-show="showLogin">
 		<div style="margin:auto;width:50%;">
-			<h1 style="margin-top:100px;margin-bottom:-50px;text-align:center;">ChatterBox</h1>
+			<h1 style="margin-top:100px;margin-bottom:-10px;text-align:center;">ChatterBox</h1>
 		</div>
 		<div>
 			<div class="login-page">
@@ -29,15 +39,24 @@
 		</div>
 	</div>
 	<div ng-hide="showLogin" id="chat-box">
-		<div class="wrapper">
-			<div class="header">
-				<h1 style="text-align:center">ChatterBox</h1>
-				<button ng-click="logout()">Logout</button>
+		<div class="header">
+			<div class="row">
+				<div class="col-xs-3">
+					
+				</div>
+				<div class="col-xs-6">
+					<h1>ChatterBox</h1>
+				</div>
+				<div class="col-xs-3">
+					<button class="btn" style="margin-top:20px" ng-click="logout()">Logout</button>
+				</div>
 			</div>
-			<div class="sidebar">
+		</div>
+		<div class="row">
+			<div id="side-bar" class="col-xs-2">
 
 			</div>
-			<div class="chat-body">
+			<div id="main-body" class="col-xs-10">
 
 			</div>
 		</div>

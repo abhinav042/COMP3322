@@ -51,7 +51,7 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   const db = req.db;
   const collection = db.get('userList');
-  collection.update({_id: req.session.userId}, {status: 'offline'});
+  collection.update({_id: req.session.userId}, {$set: {status: 'online'}});
   req.session.userId = null;
   res.send('');
 });
