@@ -2,22 +2,17 @@ var express = require('express');
 var router = express.Router();
 let sess;
 
-// /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-
 /* GET load */
 router.get('/load', (req, res, next) => {
   sess = req.session;
   if (!sess.userId) {
-    res.send('');
+    res.send("");
   } else {
     const db = req.db;
     const collection = db.get('userList');
     const filter = {_id : sess.userId};
     collection.find(filter, (err, docs) => {
-      res.json(docs);
+      res.json(docs[0]);
     });
   }
 });

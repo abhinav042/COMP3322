@@ -11,8 +11,8 @@
 	<script src="/javascripts/myscripts.js">
 	</script>
 </head>
-<body ng-app="chatterBox" ng-controller="chatController">
-	<div>
+<body ng-app="chatterBox" ng-controller="chatController" ng-init="load()">
+	<div id="login-div" ng-show="showLogin">
 		<div style="margin:auto;width:50%;">
 			<h1 style="margin-top:100px;margin-bottom:-50px;text-align:center;">ChatterBox</h1>
 		</div>
@@ -22,11 +22,14 @@
 					<form class="login-form">
 						<input ng-model="username" placeholder="username" type="text">
 						<input ng-model="password" placeholder="password" type="password">
-						<button ng-click="login();">login</button>
+						<button ng-click="login()">login</button>
 					</form>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div ng-hide="showLogin" id="chat-box">
+		<h2>CHATBOX IS APPEARING</h2>
 	</div>
 </body>
 </html>
