@@ -4,17 +4,33 @@ let sess;
 
 /* GET load */
 router.get('/load', (req, res, next) => {
+  let responseJson = {};
   sess = req.session;
   console.log(`the session id is ${req.session.userId}`);
   if (!sess.userId) {
     res.send("");
   } else {
-    const db = req.db;
-    const collection = db.get('userList');
-    const filter = {_id : sess.userId};
-    collection.find(filter, (err, docs) => {
-      res.json(docs[0]);
-    });
+    async function returnLoad() {
+      const db = req.db;
+      let responseJson = {};
+      let friends_arr = [];
+      const collection = db.get('userList');
+      const filter = {_id : sess.userId};
+      const user = await collection.findOne(filter);
+      const friend_promise = user.friends.map(friend => {
+        return collection.findOne({name:friend.name});
+      });
+      const friend_data = await Promise.all([...friend_promise]);
+      
+      responseJson = {
+        name: user.name,
+        icon: user.icon,
+        friends: friend_data
+      }
+      console.log(responseJson);
+    }
+    returnLoad();
+    res.json(responseJson);
   }
 });
 
@@ -24,7 +40,6 @@ router.post('/login', (req, res, next) => {
   const collection = db.get('userList');
   const username = req.body.username;
   const password = req.body.password;
-  console.log(`the username is ${username}, the password is ${password}`);
   collection.find({name:username, password:password}, (err, docs) => {
     if (err === null) {
       if (docs.length === 0) {
