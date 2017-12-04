@@ -32,7 +32,7 @@
 					<form class="login-form">
 						<input ng-model="username" placeholder="username" type="text">
 						<input ng-model="password" placeholder="password" type="password">
-						<button ng-click="login()">login</button>
+						<button ng-click="load(); login();">login</button>
 					</form>
 				</div>
 			</div>
@@ -41,8 +41,9 @@
 	<div ng-hide="showLogin" id="chat-box">
 		<div class="header">
 			<div class="row">
-				<div class="col-xs-3">
-					<h3 style='text-align:center'>{{name}}</h3>
+				<div ng-click="" class="col-xs-3">
+					<span> ICON </span>
+					<h3 style='text-align:right; padding-right: 10px'>{{name}}</h3>
 				</div>
 				<div class="col-xs-6">
 					<h1>ChatterBox</h1>
@@ -53,14 +54,44 @@
 			</div>
 		</div>
 		<div class="row">
-			<div id="side-bar" class="col-xs-2">
+			<div id="side-bar" class="col-xs-3">
 				<h3 style="text-align:center">Friends</h3>
-				<div class="friend" ng-repeat="friend in friends">
-					<h4>{{friend.name}}</h4>
-				</div>
+				<ul class="list-group">
+					<li class="list-group-item" class="friend" ng-repeat="friend in friends">
+						<div ng-click="getConversation(friend._id)" id="friend._id">
+							{{friend.name}}
+							<span ng-if="friend.unread_counter > 0">
+								({{friend.unread_counter}})
+							</span>
+						</div>
+					</li>
+				</ul>
 			</div>
-			<div id="main-body" class="col-xs-10">
-				
+			<div id="main-body" class="col-xs-9">
+				<div ng-show="showChat">
+					<header class="top-bar">	
+						<div class="left">
+							<span class="icon typicons-message"></span>
+							<h1>{{current_friend.name}}</h1>
+						</div>
+						<div class="right">
+							<span class="icon typicons-minus"></span>
+							<span class="icon typicons-times"></span>
+						</div>
+					</header>
+					<ol class="discussion">
+						<div ></div>
+						<li class="other">
+							<div class="avatar">
+								<img src="" />
+							</div>
+							<div class="messages">
+								<p>yeah, they do early flights cause they connect with big airports.  they wanna get u to your connection</p>
+								<time datetime="2009-11-13T20:00">Timothy • 51 min</time>
+							</div>
+						</li>
+					</ol>
+				</div>
 			</div>
 		</div>
 	</div>
