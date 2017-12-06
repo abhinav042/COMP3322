@@ -7,8 +7,10 @@ chatter_box.controller('chatController', function($scope, $http) {
             console.log(res.data);
             if (res.data == "") {
                 $scope.showLogin = true;
+                $scope.showChat = false;
             }
             else {
+                $scope.userId = res.data._id;
                 $scope.name = res.data.name;
                 $scope.friends = res.data.friends;
                 $scope.showLogin = false;

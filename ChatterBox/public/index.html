@@ -32,7 +32,7 @@
 					<form class="login-form">
 						<input ng-model="username" placeholder="username" type="text">
 						<input ng-model="password" placeholder="password" type="password">
-						<button ng-click="load(); login();">login</button>
+						<button ng-click="login(); load();">login</button>
 					</form>
 				</div>
 			</div>
@@ -41,7 +41,7 @@
 	<div ng-hide="showLogin" id="chat-box">
 		<div class="header">
 			<div class="row">
-				<div ng-click="" class="col-xs-3">
+				<div style='border-right-style:solid;' ng-click="" class="col-xs-3">
 					<span> ICON </span>
 					<h3 style='text-align:right; padding-right: 10px'>{{name}}</h3>
 				</div>
@@ -56,16 +56,16 @@
 		<div class="row">
 			<div id="side-bar" class="col-xs-3">
 				<h3 style="text-align:center">Friends</h3>
-				<ul class="list-group">
-					<li class="list-group-item" class="friend" ng-repeat="friend in friends">
+				<div class="list-group">
+					<a href="#" class="list-group-item" class="friend" ng-repeat="friend in friends">
 						<div ng-click="getConversation(friend._id)" id="friend._id">
 							{{friend.name}}
-							<span ng-if="friend.unread_counter > 0">
-								({{friend.unread_counter}})
+							<span ng-if="friend.unread_counter > 0" class="badge">
+								{{friend.unread_counter}}
 							</span>
 						</div>
-					</li>
-				</ul>
+					</a>
+				</div>
 			</div>
 			<div id="main-body" class="col-xs-9">
 				<div ng-show="showChat">
@@ -80,16 +80,30 @@
 						</div>
 					</header>
 					<ol class="discussion">
-						<div ></div>
-						<li class="other">
-							<div class="avatar">
-								<img src="" />
+						<div ng-repeat = "message in current_friend.messageList">
+							<div ng-if="message.senderId == userId">
+								<li class="self">
+									<div class="avatar">
+										<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/5/profile/profile-80_9.jpg" />
+									</div>
+									<div class="messages">
+										<p>{{message.message}}</p>
+										<time>{{name}} • {{message.date}} • {{message.time}}</time>
+									</div>
+								</li>
 							</div>
-							<div class="messages">
-								<p>yeah, they do early flights cause they connect with big airports.  they wanna get u to your connection</p>
-								<time datetime="2009-11-13T20:00">Timothy • 51 min</time>
+							<div ng-if="message.senderId == current_friend._id">
+								<li class="other">
+									<div class="avatar">
+										<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/5/profile/profile-80_9.jpg" />
+									</div>
+									<div class="messages">
+										<p>{{message.message}}</p>
+										<time>{{current_friend.name}} • {{message.date}} • {{message.time}}</time>
+									</div>
+								</li>
 							</div>
-						</li>
+						</div>
 					</ol>
 				</div>
 			</div>
