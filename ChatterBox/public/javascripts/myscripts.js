@@ -11,6 +11,7 @@ chatter_box.controller('chatController', function($scope, $http) {
             }
             else {
                 $scope.userId = res.data._id;
+                $scope.icon = res.data.icon;
                 $scope.name = res.data.name;
                 $scope.friends = res.data.friends;
                 $scope.showLogin = false;
@@ -67,7 +68,36 @@ chatter_box.controller('chatController', function($scope, $http) {
             // console.log(res.data);
             $scope.showChat = true;
             $scope.showInfo = false;
+            $scope.new_text = "";
             $scope.current_friend = res.data;
+        });
+    };
+
+    $scope.postMessage = function() {
+        console.log('hi');
+        friend_id = $scope.current_friend._id;
+        if ($scope.new_text != "") {
+            console.log('hi');
+            const curr_date = new Date().toLocaleDateString();
+            const curr_time = new Date().toLocaleTimeString();            
+            $http.post(`/postmessage/${friend_id}`, {message:$scope.new_text, date:curr_date, time:curr_time}).then(res => {
+                $scope.new_text = "";
+                // if (res.data.msg != err) {
+                // }
+            });
+        }
+    };
+});
+
+angular.module('chatterBox').directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+                event.preventDefault();
+            }
         });
     };
 });
