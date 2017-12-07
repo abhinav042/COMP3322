@@ -32,16 +32,17 @@
 					<form class="login-form">
 						<input ng-model="username" placeholder="username" type="text">
 						<input ng-model="password" placeholder="password" type="password">
-						<button ng-click="login(); load();">login</button>
+						<button ng-click="login();">login</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div ng-hide="showLogin" id="chat-box">
+		<!-- HEADER -->
 		<div class="header">
 			<div class="row">
-				<div style='border-right-style:solid;' ng-click="" class="col-xs-3">
+				<div style='border-right-style:solid;' ng-click="getUserInfo()" class="col-xs-3">
 					<span> ICON </span>
 					<h3 style='text-align:right; padding-right: 10px'>{{name}}</h3>
 				</div>
@@ -54,6 +55,9 @@
 			</div>
 		</div>
 		<div class="row">
+
+			<!-- SIDEBAR -->
+
 			<div id="side-bar" class="col-xs-3">
 				<h3 style="text-align:center">Friends</h3>
 				<div class="list-group">
@@ -67,7 +71,13 @@
 					</a>
 				</div>
 			</div>
+
+			<!-- MAIN BODY -->
+
 			<div id="main-body" class="col-xs-9">
+
+				<!-- SHOW CHAT CONVERSATIONS -->
+
 				<div ng-show="showChat">
 					<header class="top-bar">	
 						<div class="left">
@@ -106,6 +116,27 @@
 						</div>
 					</ol>
 				</div>
+
+				<!-- SHOW EDIT USER INFO -->
+
+				<div ng-show="showInfo">
+					<form>
+						<div class="from-group">
+							<label for="mobile-number">Mobile Number</label>
+							<input ng-model="mobileNumber" type="text" class="form-control" id="mobile-number-input" aria-describedby="mobileHelp" placeholder="{{address}}">
+						</div>
+						<div class="form-group">
+							<label for="home-number">Home Number</label>
+							<input ng-model="homeNumber" type="text" class="form-control" id="home-number-input" placeholder="{{homeNumber}}">
+						</div>
+						<div class="form-group">
+							<label for="address">Address</label>
+							<input ng-model="address" type="text" class="form-control" id="address" placeholder="{{mobileNumber}}">
+						</div>
+						<button type="submit" ng-click="updateUserInfo()" class="btn btn-primary">Send</button>
+					</form>
+				</div>
+
 			</div>
 		</div>
 	</div>

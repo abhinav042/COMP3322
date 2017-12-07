@@ -29,7 +29,7 @@ router.get('/load', async (req, res, next) => {
       return messageCollection.find({senderId: friend_id, receiverId:req.session.userId});
     });
     const message_list = await Promise.all([...message_promise]);
-    console.log(message_list);
+    // console.log(message_list);
     message_list.forEach((message_collection, index) => {
       let unread_messages = 0;
       for (let i = 0; i < message_collection.length; ++i) {
@@ -158,16 +158,92 @@ router.post('/postmessage/:friendid', async (req, res, next) => {
 /* DELETE message */
 router.delete('/deletemessage/:msgid', async (req, res, next) => {
   const db = req.db;
-  const collection = db.get('messageList');
+  const messageCollection = db.get('messageList');
+  const collection = db.get('userList');
   const msgId = req.params.msgid;
-  await collection.remove({_id:msgId});
-}); 
+  const user_id = req.session.userId;
+  const messageList = await messageCollection.find({senderId: friendId, receiverId:user_id});
+  if (messageList[messageList.length - 1]._id == msgId) {
+    await collection.update({_id: user_id, "friends.name": friend.name}, {$set: {"friends.$.lastMsgId": messageList[messageList.length-2]._id.toString()}});
+  }
+});
 
 /* GET getnewmessages */
 router.get('/getnewmessages/:friendid', async (req, res, next) => {
-
+  let toggleAdd = false;
+  let message_not_retrieved = [];
+  let all_messages_id;
+  const db = req.db;
+  const collection = db.get('userList');
+  const messageCollection = db.get('messageList');
+  const friendId = req.params.friendid;
+  const friend = await collection.findOne({_id: monk.id(friendId)});
+  const user = await collection.findOne({_id: req.session.userId});
+  try {
+    for (let i = 0; i < user.friends.length; i++) {
+      if (user.friends[i].name == friend.name) {
+        messageList = await messageCollection.find({senderId:friendId, receiverId:req.session.userId.toString()});
+        // console.log(messageList);
+        for (let j = 0; j < messageList.length; j++) {
+          if (messageList[j]._id == user.friends[i].lastMsgId) {
+            toggleAdd = true;
+          }
+          if (toggleAdd === true) {
+            // console.log(toggleAdd);
+            message_not_retrieved.push(messageList[j]);
+          }
+        }
+        // console.log(message_not_retrieved);
+        all_messages_id = await messageCollection.find({$or: [{senderId: friendId, receiverId:req.session.userId.toString()}, {senderId:req.session.userId.toString(), receiverId: friendId}]}, {fields: {_id:1}});
+        // console.log(all_messages_id);
+        break;
+      }
+    }
+    const responseJson = {
+      'status': friend.status,
+      'message_not_retrieved': message_not_retrieved,
+      'messages_id': all_messages_id
+    }
+    res.json(responseJson);
+  } catch(err) {
+    res.send({msg:err});
+  }
 });
 
 /* GET getnewmessagenumber */
+router.get('/getnewmsgnum/:friendid', async (req, res, next) => {
+  let toggleAdd = false;
+  let message_not_retrieved = 0;
+  const db = req.db;
+  const collection = db.get('userList');
+  const messageCollection = db.get('messageList');
+  const friendId = req.params.friendid;
+  const friend = await collection.findOne({_id: monk.id(friendId)});
+  const user = await collection.findOne({_id: req.session.userId});
+  try {
+    for (let i = 0; i < user.friends.length; i++) {
+      if (user.friends[i].name == friend.name) {
+        messageList = await messageCollection.find({senderId:friendId, receiverId:req.session.userId.toString()});
+        // console.log(messageList);
+        for (let j = 0; j < messageList.length; j++) {
+          if (toggleAdd === true) {
+            // console.log(toggleAdd);
+            message_not_retrieved++;
+          }
+          if (messageList[j]._id == user.friends[i].lastMsgId) {
+            toggleAdd = true;
+          }
+        }
+        break;
+      }
+    }
+    const responseJson = {
+      'message_not_retrieved': message_not_retrieved
+    }
+    res.json(responseJson);
+  } catch(err) {
+    res.send({msg:err});
+  }
+});
 
 module.exports = router;
