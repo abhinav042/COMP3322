@@ -77,6 +77,12 @@ chatter_box.controller('chatController', function($scope, $http) {
             $scope.showInfo = false;
             $scope.new_text = "";
             $scope.current_friend = res.data;
+            for (let friend of $scope.friends) {
+                if (friend._id == $scope.current_friend._id) {
+                    friend.unread_counter = 0;
+                }
+                // console.log(friend);
+            }
         });
     };
 

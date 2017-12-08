@@ -41,6 +41,9 @@ router.get('/load', async (req, res, next) => {
           break;
         }
       }
+      if (unread_messages > 0) {
+        unread_messages--;
+      }
       friend_data[index].unread_counter = unread_messages;
     });
     responseJson = {
@@ -227,7 +230,8 @@ router.get('/getnewmsgnum/:friendid', async (req, res, next) => {
   try {
     for (let i = 0; i < user.friends.length; i++) {
       if (user.friends[i].name == friend.name) {
-        messageList = await messageCollection.find({senderId:friendId, receiverId:req.session.userId.toString()});
+        // messageList = await messageCollection.find({senderId:friendId, receiverId:req.session.userId.toString()});
+        messageList = await messageCollection.find({$or: [{senderId: friendId, receiverId:req.session.userId.toString()}, {senderId:req.session.userId.toString(), receiverId: friendId}]});
         // console.log(messageList);
         for (let j = 0; j < messageList.length; j++) {
           if (toggleAdd === true) {
