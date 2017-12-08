@@ -1,13 +1,17 @@
 const chatter_box = angular.module('chatterBox', []);
 
-chatter_box.controller('chatController', function($scope, $http) {
+chatter_box.controller('chatController', function($scope, $http, $interval) {
 
     $scope.load = function() {
         $http.get("/load").then(res => {
-            $scope.showInfo = false;
             if (res.data == "") {
+                $scope.showInfo = false;
                 $scope.showLogin = true;
                 $scope.showChat = false;
+                $scope.userId = null;
+                $scope.icon = null;
+                $scope.name = null;
+                $scope.friends = null;
             }
             else {
                 $scope.userId = res.data._id;
@@ -110,22 +114,32 @@ chatter_box.controller('chatController', function($scope, $http) {
         }
     };
 
-    // $interval(() => {
-    //     if ($scope.current_friend) {
-    //         $http.get(`/getnewmessages/${$scope.current_friend._id}`).then(res => {
-    //             $scope.current_friend = res.friend;
-    //         });
-    //     }
-    //     if ($scope.friends) {
-    //         for (let friend of $scope.friends) {
-    //             if (friend._id != $scope.current_friend._id) {
-    //                 $http.get(`/getnewmsgnum/${friend._id}`).then(res => {
-    //                     friend.unread_counter = parseInt(res.data.message_not_retrieved);
-    //                 });
-    //             }
-    //         }
-    //     }
-    // }, 1000);
+    $interval(() => {
+        if ($scope.current_friend) {
+            $http.get(`/getnewmessages/${$scope.current_friend._id}`).then(res => {
+                // console.log([...$scope.current_friend.messageList, ...res.data.friend]);
+                // console.log(res.data.message_not_retrieved);
+                $scope.current_friend.messageList = res.data.messages_id;
+                $scope.current_friend.status = res.data.status;
+            });
+        }
+        if ($scope.friends) {
+            for (let friend of $scope.friends) {
+                if ($scope.current_friend) {
+                    if (friend._id != $scope.current_friend) {
+                        $http.get(`/getnewmsgnum/${friend._id}`).then(res => {
+                            friend.unread_counter = parseInt(res.data.message_not_retrieved);
+                        });    
+                    }
+                } else {
+                    // console.log(friend);
+                    $http.get(`/getnewmsgnum/${friend._id}`).then(res => {
+                        friend.unread_counter = parseInt(res.data.message_not_retrieved);
+                    });
+                }
+            }
+        }
+    }, 1000);
 
 });
 

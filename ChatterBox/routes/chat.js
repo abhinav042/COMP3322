@@ -201,7 +201,7 @@ router.get('/getnewmessages/:friendid', async (req, res, next) => {
           }
         }
         // console.log(message_not_retrieved);
-        all_messages_id = await messageCollection.find({$or: [{senderId: friendId, receiverId:req.session.userId.toString()}, {senderId:req.session.userId.toString(), receiverId: friendId}]}, {fields: {_id:1}});
+        all_messages_id = await messageCollection.find({$or: [{senderId: friendId, receiverId:req.session.userId.toString()}, {senderId:req.session.userId.toString(), receiverId: friendId}]});
         // console.log(all_messages_id);
         break;
       }
