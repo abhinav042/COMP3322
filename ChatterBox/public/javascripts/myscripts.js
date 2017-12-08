@@ -26,9 +26,10 @@ chatter_box.controller('chatController', function($scope, $http) {
                     console.log("THERE WAS A VALIDATION ERROR");
                     $scope.showLogin = true;
                 } else {
-                    $scope.login();
+                    $scope.showChat = false;
                     $scope.showLogin = false;
                     $scope.showInfo = false;
+                    $scope.load();
                 }
             });
         } else {
@@ -39,7 +40,13 @@ chatter_box.controller('chatController', function($scope, $http) {
     $scope.logout = function() {
         $http.get("/logout").then(res => {
             if (res.data == "") {
+                $scope.showChat = false;
+                $scope.showInfo = false;
                 $scope.showLogin = true;
+                $scope.userId = null;
+                $scope.icon = null;
+                $scope.name = null;
+                $scope.friends = null;
             }
         });
     };
@@ -74,19 +81,46 @@ chatter_box.controller('chatController', function($scope, $http) {
     };
 
     $scope.postMessage = function() {
-        console.log('hi');
         friend_id = $scope.current_friend._id;
         if ($scope.new_text != "") {
             console.log('hi');
             const curr_date = new Date().toLocaleDateString();
             const curr_time = new Date().toLocaleTimeString();            
             $http.post(`/postmessage/${friend_id}`, {message:$scope.new_text, date:curr_date, time:curr_time}).then(res => {
+                $scope.getConversation(friend_id);
                 $scope.new_text = "";
                 // if (res.data.msg != err) {
                 // }
             });
         }
     };
+
+    $scope.deleteMessage = function(message_id) {
+        const friend_id = $scope.current_friend;
+        if (confirm("Are you sure you want to delete?") == true) {
+            $http.delete(`/deletemessage/${message_id}`).then(res => {
+                $scope.getConversation(friend_id);
+            });
+        }
+    };
+
+    // $interval(() => {
+    //     if ($scope.current_friend) {
+    //         $http.get(`/getnewmessages/${$scope.current_friend._id}`).then(res => {
+    //             $scope.current_friend = res.friend;
+    //         });
+    //     }
+    //     if ($scope.friends) {
+    //         for (let friend of $scope.friends) {
+    //             if (friend._id != $scope.current_friend._id) {
+    //                 $http.get(`/getnewmsgnum/${friend._id}`).then(res => {
+    //                     friend.unread_counter = parseInt(res.data.message_not_retrieved);
+    //                 });
+    //             }
+    //         }
+    //     }
+    // }, 1000);
+
 });
 
 angular.module('chatterBox').directive('ngEnter', function () {

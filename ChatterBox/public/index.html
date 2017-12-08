@@ -97,7 +97,7 @@
 					<ol class="discussion">
 						<div ng-repeat = "message in current_friend.messageList">
 							<div ng-if="message.senderId == userId">
-								<li class="self">
+								<li ng-dblclick="deleteMessage(message._id)" class="self">
 									<div class="avatar">
 										<img src="{{icon}}" />
 									</div>
@@ -108,7 +108,7 @@
 								</li>
 							</div>
 							<div ng-if="message.senderId == current_friend._id">
-								<li class="other">
+								<li onclick="console.log('hi');" ng-dblclick="deleteMessage(message._id)" class="other">
 									<div class="avatar">
 										<img src="{{current_friend.icon}}" />
 									</div>
@@ -123,7 +123,7 @@
 					<form style="width:100%; position:fixed; bottom:0">
 						<div class="form-group">
 							<div class="inputlg">
-								<input ng-model="new_text" ng-enter="postMessage(); getConversation(current_friend._id)" style="width:100%;" class="form-control" id="send_message" type="text" placeholder="{{name}}'s new message...">
+								<input ng-model="new_text" ng-enter="postMessage();" style="width:100%;" class="form-control" id="send_message" type="text" placeholder="{{name}}'s new message...">
 							</div>
 						</div>
 					</form>
@@ -149,7 +149,6 @@
 						<button type="submit" ng-click="updateUserInfo()" class="btn btn-primary">Send</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>

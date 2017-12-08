@@ -22,18 +22,19 @@ router.get('/load', async (req, res, next) => {
       return collection.findOne({name:friend.name}, {fields: {name:1}});
     });
     const friend_data = await Promise.all([...friend_promise]);
-    // console.log(friend_data);
+    console.log(friend_data);
     const messageCollection = db.get('messageList');
     const message_promise = friend_data.map(friend => {
       let friend_id = friend._id.toString();
-      return messageCollection.find({senderId: friend_id, receiverId:req.session.userId});
+      return messageCollection.find({$or: [{senderId: friend_id, receiverId:user._id.toString()}, {senderId:user._id.toString(), receiverId: friend_id}]});
     });
     const message_list = await Promise.all([...message_promise]);
     // console.log(message_list);
     message_list.forEach((message_collection, index) => {
       let unread_messages = 0;
       for (let i = 0; i < message_collection.length; ++i) {
-        if (message_collection[i] == friend_data[index].lastMsgId) {
+        console.log(`message_collection[i]._id is ${message_collection[i]._id} and the other value is ${user.friends[index].lastMsgId}`);
+        if (message_collection[i]._id == user.friends[index].lastMsgId) {
           for (let j = i; j < message_collection.length; j++) {
             unread_messages++;
           }
@@ -48,7 +49,7 @@ router.get('/load', async (req, res, next) => {
       icon: user.icon,
       friends: friend_data
     };
-    // console.log(responseJson);
+    console.log(responseJson);
     res.json(responseJson);
   }
 });
@@ -85,9 +86,10 @@ router.post('/login', async (req, res, next) => {
 router.get('/logout', async (req, res, next) => {
   const db = req.db;
   const collection = db.get('userList');
-  await collection.update({_id: req.session.userId}, {$set: {status: 'online'}});
-  req.session.userId = null;
-  res.send('');
+  await collection.update({_id: req.session.userId}, {$set: {status: 'offline'}});
+  req.session.destroy(err => {
+    res.send('');
+  });
 });
 
 /* GET getUserInfo */
@@ -162,10 +164,12 @@ router.delete('/deletemessage/:msgid', async (req, res, next) => {
   const collection = db.get('userList');
   const msgId = req.params.msgid;
   const user_id = req.session.userId;
-  const messageList = await messageCollection.find({senderId: friendId, receiverId:user_id});
-  if (messageList[messageList.length - 1]._id == msgId) {
-    await collection.update({_id: user_id, "friends.name": friend.name}, {$set: {"friends.$.lastMsgId": messageList[messageList.length-2]._id.toString()}});
-  }
+  // const messageList = await messageCollection.find({senderId: friendId, receiverId:user_id});
+  // // if (messageList[messageList.length - 1]._id == msgId) {
+  // //   await collection.update({_id: user_id, "friends.name": friend.name}, {$set: {"friends.$.lastMsgId": messageList[messageList.length-2]._id.toString()}});
+  // // }
+  console.log(`now deleting ${monk.id(msgId)}`);
+  await messageCollection.remove({_id:monk.id(msgId)});
 });
 
 /* GET getnewmessages */
