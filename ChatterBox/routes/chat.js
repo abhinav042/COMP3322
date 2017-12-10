@@ -8,7 +8,6 @@ let sess;
 router.get('/load', async (req, res, next) => {
   let responseJson = {};
   sess = req.session;
-  // console.log(`the session id is ${req.session.userId}`);
   if (!sess.userId) {
     res.send("");
   } else {
@@ -29,7 +28,6 @@ router.get('/load', async (req, res, next) => {
       return messageCollection.find({$or: [{senderId: friend_id, receiverId:user._id.toString()}, {senderId:user._id.toString(), receiverId: friend_id}]});
     });
     const message_list = await Promise.all([...message_promise]);
-    // console.log(message_list);
     message_list.forEach((message_collection, index) => {
       let unread_messages = 0;
       for (let i = 0; i < message_collection.length; ++i) {
@@ -72,7 +70,6 @@ router.post('/login', async (req, res, next) => {
         });
       } else {
         req.session.userId = docs[0]._id;
-        // console.log(`The userId is ${req.session.userId}`);
         await collection.update({_id: req.session.userId}, {$set: {status: 'online'}});
         const responseJSON = {
           'name' : docs[0].name,
@@ -125,7 +122,6 @@ router.put('/saveuserinfo', async (req, res, next) => {
 });
 
 /* GET get conversation with friend */
-// TODO
 router.get('/getconversation/:friendid', async (req, res, next) => {
   const friendId = req.params.friendid;
   const db = req.db;
@@ -134,7 +130,6 @@ router.get('/getconversation/:friendid', async (req, res, next) => {
   const id = monk.id(friendId);
   const friend = await collection.findOne({_id:id}, {fields: {name: 1, icon: 1, status: 1}});
   let messageList;
-  // console.log(`the friend is ${friend}`);
   const user_id = (req.session.userId).toString();
   try {
     messageList = await messageCollection.find({$or: [{senderId: friendId, receiverId:user_id}, {senderId:user_id, receiverId: friendId}]});
@@ -167,10 +162,6 @@ router.delete('/deletemessage/:msgid', async (req, res, next) => {
   const collection = db.get('userList');
   const msgId = req.params.msgid;
   const user_id = req.session.userId;
-  // const messageList = await messageCollection.find({senderId: friendId, receiverId:user_id});
-  // // if (messageList[messageList.length - 1]._id == msgId) {
-  // //   await collection.update({_id: user_id, "friends.name": friend.name}, {$set: {"friends.$.lastMsgId": messageList[messageList.length-2]._id.toString()}});
-  // // }
   console.log(`now deleting ${monk.id(msgId)}`);
   await messageCollection.remove({_id:monk.id(msgId)});
 });
@@ -190,19 +181,15 @@ router.get('/getnewmessages/:friendid', async (req, res, next) => {
     for (let i = 0; i < user.friends.length; i++) {
       if (user.friends[i].name == friend.name) {
         messageList = await messageCollection.find({senderId:friendId, receiverId:req.session.userId.toString()});
-        // console.log(messageList);
         for (let j = 0; j < messageList.length; j++) {
           if (messageList[j]._id == user.friends[i].lastMsgId) {
             toggleAdd = true;
           }
           if (toggleAdd === true) {
-            // console.log(toggleAdd);
             message_not_retrieved.push(messageList[j]);
           }
         }
-        // console.log(message_not_retrieved);
         all_messages_id = await messageCollection.find({$or: [{senderId: friendId, receiverId:req.session.userId.toString()}, {senderId:req.session.userId.toString(), receiverId: friendId}]});
-        // console.log(all_messages_id);
         break;
       }
     }
@@ -232,10 +219,8 @@ router.get('/getnewmsgnum/:friendid', async (req, res, next) => {
       if (user.friends[i].name == friend.name) {
         // messageList = await messageCollection.find({senderId:friendId, receiverId:req.session.userId.toString()});
         messageList = await messageCollection.find({$or: [{senderId: friendId, receiverId:req.session.userId.toString()}, {senderId:req.session.userId.toString(), receiverId: friendId}]});
-        // console.log(messageList);
         for (let j = 0; j < messageList.length; j++) {
           if (toggleAdd === true) {
-            // console.log(toggleAdd);
             message_not_retrieved++;
           }
           if (messageList[j]._id == user.friends[i].lastMsgId) {

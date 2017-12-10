@@ -27,7 +27,7 @@ chatter_box.controller('chatController', function($scope, $http, $interval) {
         if ($scope.username && $scope.password) {
             $http.post("/login", {username:$scope.username, password:$scope.password}).then(res => {
                 if (res.data.msg === 'LOGIN INVALID') {
-                    console.log("THERE WAS A VALIDATION ERROR");
+                    alert("THERE WAS A VALIDATION ERROR");
                     $scope.showLogin = true;
                 } else {
                     $scope.showChat = false;
@@ -76,7 +76,6 @@ chatter_box.controller('chatController', function($scope, $http, $interval) {
 
     $scope.getConversation = function(friend_id) {
         $http.get(`/getconversation/${friend_id}`).then(res => {
-            // console.log(res.data);
             $scope.showChat = true;
             $scope.showInfo = false;
             $scope.new_text = "";
@@ -85,7 +84,6 @@ chatter_box.controller('chatController', function($scope, $http, $interval) {
                 if (friend._id == $scope.current_friend._id) {
                     friend.unread_counter = 0;
                 }
-                // console.log(friend);
             }
         });
     };
@@ -99,8 +97,6 @@ chatter_box.controller('chatController', function($scope, $http, $interval) {
             $http.post(`/postmessage/${friend_id}`, {message:$scope.new_text, date:curr_date, time:curr_time}).then(res => {
                 $scope.getConversation(friend_id);
                 $scope.new_text = "";
-                // if (res.data.msg != err) {
-                // }
             });
         }
     };
@@ -117,8 +113,6 @@ chatter_box.controller('chatController', function($scope, $http, $interval) {
     $interval(() => {
         if ($scope.current_friend) {
             $http.get(`/getnewmessages/${$scope.current_friend._id}`).then(res => {
-                // console.log([...$scope.current_friend.messageList, ...res.data.friend]);
-                // console.log(res.data.message_not_retrieved);
                 $scope.current_friend.messageList = res.data.messages_id;
                 $scope.current_friend.status = res.data.status;
             });
@@ -132,7 +126,6 @@ chatter_box.controller('chatController', function($scope, $http, $interval) {
                         });    
                     }
                 } else {
-                    // console.log(friend);
                     $http.get(`/getnewmsgnum/${friend._id}`).then(res => {
                         friend.unread_counter = parseInt(res.data.message_not_retrieved);
                     });
